@@ -2,27 +2,48 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Фермерские продукты</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FermApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      background: #2e7d32;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .cart-icon span {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <h1>🛒 Фермерский магазин</h1>
+
+  <!-- Иконка корзины -->
+  <div class="cart-icon" onclick="goToCart()">
+    🛒 <span id="cart-count">0</span>
+  </div>
+
   <div class="item">
     <h2>🥚 Яйца (10 шт) — 1200₸</h2>
     <button onclick="addToCart('Яйца', 1200)">Добавить в корзину</button>
   </div>
+
   <div class="item">
     <h2>🥛 Молоко (1 л) — 700₸</h2>
     <button onclick="addToCart('Молоко', 700)">Добавить в корзину</button>
   </div>
+
   <div class="item">
     <h2>🥩 Говядина (1 кг) — 4500₸</h2>
     <button onclick="addToCart('Говядина', 4500)">Добавить в корзину</button>
   </div>
-  <hr>
-  <button onclick="submitOrder()">✅ Оформить заказ</button>
 
   <script src="script.js"></script>
 </body>

@@ -1,19 +1,25 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-let cart = [];
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const countEl = document.getElementById("cart-count");
+  if (countEl) {
+    countEl.innerText = cart.length;
+  }
+}
 
 function addToCart(product, price) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
   cart.push({ product, price });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
   alert(`${product} добавлен в корзину`);
 }
 
-function submitOrder() {
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-  const data = {
-    order: cart,
-    total
-  };
-  tg.sendData(JSON.stringify(data));
-  tg.close();
+function goToCart() {
+  window.location.href = "cart.html";
 }
+
+// при открытии страницы обновляем счётчик
+updateCartCount();
