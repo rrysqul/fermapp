@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <title>Фермерские продукты</title>
   <meta charset="UTF-8">
+  <title>Фермерские продукты</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    button { padding: 10px; margin: 10px 0; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>🥚 Натуральные яйца - 1200₸ / 10 шт</h2>
-  <button onclick="submitOrder()">🛒 Заказать</button>
+  <h1>🛒 Фермерский магазин</h1>
+  <div class="item">
+    <h2>🥚 Яйца (10 шт) — 1200₸</h2>
+    <button onclick="addToCart('Яйца', 1200)">Добавить в корзину</button>
+  </div>
+  <div class="item">
+    <h2>🥛 Молоко (1 л) — 700₸</h2>
+    <button onclick="addToCart('Молоко', 700)">Добавить в корзину</button>
+  </div>
+  <div class="item">
+    <h2>🥩 Говядина (1 кг) — 4500₸</h2>
+    <button onclick="addToCart('Говядина', 4500)">Добавить в корзину</button>
+  </div>
+  <hr>
+  <button onclick="submitOrder()">✅ Оформить заказ</button>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand(); // разворачивает окно
-    function submitOrder() {
-      tg.sendData(JSON.stringify({
-        product: 'Яйца',
-        price: 1200,
-        quantity: 10
-      }));
-      tg.close();
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
