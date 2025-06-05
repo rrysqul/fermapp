@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Корзина</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>🛒 Ваша корзина</h1>
+  <div id="cart-items"></div>
+  <hr>
+  <h2 id="total"></h2>
+  <button onclick="submitOrder()">✅ Оформить заказ</button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const cartContainer = document.getElementById("cart-items");
+    const totalEl = document.getElementById("total");
+
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price;
+      const el = document.createElement("div");
+      el.innerHTML = `${item.product} — ${item.price}₸ <button onclick="removeItem(${index})">❌</button>`;
+      cartContainer.appendChild(el);
+    });
+
+    totalEl.innerText = `Итого: ${total}₸`;
+
+    function submitOrder() {
+      tg.sendData(JSON.stringify({ order: cart, total }));
+      tg.close();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload();
+    }
+  </script>
+</body>
+</html>
