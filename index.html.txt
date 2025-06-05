@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Фермерские продукты</title>
+  <meta charset="UTF-8">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    button { padding: 10px; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h2>🥚 Натуральные яйца - 1200₸ / 10 шт</h2>
+  <button onclick="submitOrder()">🛒 Заказать</button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand(); // разворачивает окно
+    function submitOrder() {
+      tg.sendData(JSON.stringify({
+        product: 'Яйца',
+        price: 1200,
+        quantity: 10
+      }));
+      tg.close();
+    }
+  </script>
+</body>
+</html>
